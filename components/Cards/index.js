@@ -19,3 +19,7 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 
+var request = new XMLHttpRequest();
+request.open("GET", "https://lambda-times-backend.herokuapp.com/articles");
+request.send(null);
+alert(request.status);
