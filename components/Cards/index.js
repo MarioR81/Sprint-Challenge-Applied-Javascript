@@ -19,21 +19,39 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 
-const xhr = new XMLHttpRequest();
-xhr.open('GET', encodeURI('https://lambda-times-backend.herokuapp.com/articles'));
-xhr.onload = function() {
-    if (xhr.status === 200) {
-        console.log(xhr);
-        let newTab = Tab(topic);
-      return newTab;
-    }
-    else {
-        alert('Request failed.  Returned status of ' + xhr.status);
-    }
-};
-xhr.send();
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+.then(response => {
+    const javascript = response.data.articles.javascript;
+    javascript.forEach(item => {
+        // console.log(item);
+        injectCardsToHTML.append(createCards(item));
+    })
+    const bootstrap = response.data.articles.bootstrap;
+    bootstrap.forEach(item => {
+        injectCardsToHTML.append(createCards(item));
+    })
+    const technology = response.data.articles.technology;
+    technology.forEach(item => {
+        // console.log(item);
+        injectCardsToHTML.append(createCards(item));
+    })
+    const jquery = response.data.articles.jquery;
+    jquery.forEach(item => {
+        // console.log(item);
+        injectCardsToHTML.append(createCards(item));
+    })
+    const node = response.data.articles.node;
+    node.forEach(item => {
+        // console.log(item);
+        injectCardsToHTML.append(createCards(item));
+    })
+})
+.catch(err => {
+    console.log("ERROR", err);
+})
 
 
+const injectCardsToHTML = document.querySelector('.cards-container')
 function createCards(object){
     const cardMain = document.createElement('div');
     const headline = document.createElement('div');
@@ -45,6 +63,7 @@ function createCards(object){
     cardMain.classList.add('card');
     headline.classList.add('headline');
     author.classList.add('author');
+    imgCont.classList.add('img-container')
 
     cardMain.append(headline);
     cardMain.append(author);
@@ -52,9 +71,9 @@ function createCards(object){
     imgCont.append(image);
     author.append(authorName);
 
-    headline.textContent = object.data;
+    headline.textContent = object.headline;
     image.src = object.authorPhoto;
-    authorName.textContent = `By ${object.authoName}`;
+    authorName.textContent = `By ${object.authorName}`;
 
     return cardMain;
 };

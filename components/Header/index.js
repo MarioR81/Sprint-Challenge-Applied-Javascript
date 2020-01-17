@@ -24,7 +24,7 @@ function Header() {
     headMain.append(title);
     headMain.append(temp);
 
-    date.textContent = 'MARCH 28, 2019';
+    date.textContent = 'SMARCH 28, 2020';
     title.textContent = 'Lambda Times';
     temp.textContent = '98°';
 
