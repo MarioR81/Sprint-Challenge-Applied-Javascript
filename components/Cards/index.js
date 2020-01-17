@@ -19,13 +19,36 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 
-const articlesRaw = new XMLHttpRequest();
-articlesRaw.open('GET', encodeURI('https://lambda-times-backend.herokuapp.com/articles'));
-articlesRaw.onload = function() {
-    if (articlesRaw.status === 200) {
-        console.log(articlesRaw);
+const xhr = new XMLHttpRequest();
+xhr.open('GET', encodeURI('https://lambda-times-backend.herokuapp.com/articles'));
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        // console.log(xhr);
     }
     else {
-        alert('Request failed.  Returned status of ' + articlesRaw.status);
+        alert('Request failed.  Returned status of ' + xhr.status);
     }
+};
+xhr.send();
+
+
+function createCards(object){
+    const cardMain = document.createElement('div');
+    const headline = document.createElement('div');
+    const author = document.createElement('div');
+    const imgCont = document.createElement('div');
+    const image = document.createElement('img');
+    const authorName = document.createElement('span');
+
+    cardMain.classList.add('card');
+    headline.classList.add('headline');
+    author.classList.add('author');
+
+    cardMain.append(headline);
+    cardMain.append(author);
+    author.append(imgCont);
+    imgCont.append(image);
+    author.append(authorName);
+
+    
 };
