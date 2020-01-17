@@ -19,7 +19,13 @@
 // Create a card for each of the articles and add the card to the DOM.
 
 
-var request = new XMLHttpRequest();
-request.open("GET", "https://lambda-times-backend.herokuapp.com/articles");
-request.send(null);
-alert(request.status);
+const articlesRaw = new XMLHttpRequest();
+articlesRaw.open('GET', encodeURI('https://lambda-times-backend.herokuapp.com/articles'));
+articlesRaw.onload = function() {
+    if (articlesRaw.status === 200) {
+        console.log(articlesRaw);
+    }
+    else {
+        alert('Request failed.  Returned status of ' + articlesRaw.status);
+    }
+};
