@@ -23,7 +23,9 @@ const xhr = new XMLHttpRequest();
 xhr.open('GET', encodeURI('https://lambda-times-backend.herokuapp.com/articles'));
 xhr.onload = function() {
     if (xhr.status === 200) {
-        // console.log(xhr);
+        console.log(xhr);
+        let newTab = Tab(topic);
+      return newTab;
     }
     else {
         alert('Request failed.  Returned status of ' + xhr.status);
@@ -50,5 +52,9 @@ function createCards(object){
     imgCont.append(image);
     author.append(authorName);
 
-    
+    headline.textContent = object.data;
+    image.src = object.authorPhoto;
+    authorName.textContent = `By ${object.authoName}`;
+
+    return cardMain;
 };
